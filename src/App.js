@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Loading from "./components/Loading";
 import Header from "./components/Header";
 import Detail from "./components/Detail";
+import Searching from "./components/Searching";
 
 function App() {
   const [dataList, setDataList] = useState([]);
@@ -15,14 +16,11 @@ function App() {
   const imgUrl =
     "https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/versions/generation-v/black-white/animated/";
 
-  const imgUrlPhoto =
-    "https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/";
-
   const URL = "https://pokeapi.co/api/v2/pokemon/";
 
   useEffect(() => {
     getAllPokemon();
-  }, [dataList]);
+  }, []);
 
   const getAllPokemon = () => {
     axios
@@ -83,23 +81,14 @@ function App() {
       <Header />
       <div className="flex items-center gap-2 justify-center">
         <div className="p-5">
-          <div className="my-3">
-            <input
-              type="text"
-              placeholder="name pokemon or id"
-              className="p-2 bg-slate-100"
-              onChange={(e) => setSearching(e.target.value)}
-            />
-            <button
-              disabled={!searching}
-              onClick={onClickSearch}
-              type="button"
-              className="p-2 bg-slate-200"
-            >
-              Search
-            </button>
-          </div>
+          {/* searching */}
+          <Searching
+            onClick={onClickSearch}
+            disable={!searching}
+            onChange={(searching) => setSearching(searching)}
+          />
 
+          {/* canvas pokemon */}
           <div className="grid grid-rows-4 grid-flow-col items-center gap-2">
             {loading ? (
               <Loading />
@@ -127,6 +116,7 @@ function App() {
           </div>
         </div>
 
+        {/* detail */}
         <div className="my-5">
           {loadingDetail ? (
             <Loading />
