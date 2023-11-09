@@ -8,7 +8,7 @@ import Searching from "./components/Searching";
 
 function App() {
   const [dataList, setDataList] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [loadingDetail, setLoadingDetail] = useState(false);
   const [searching, setSearching] = useState("");
   const [detail, setDetail] = useState({});
@@ -23,6 +23,7 @@ function App() {
   }, []);
 
   const getAllPokemon = () => {
+    setLoading(true);
     axios
       .get(URL)
       .then((res) => {
@@ -120,12 +121,9 @@ function App() {
         <div className="my-5">
           {loadingDetail ? (
             <Loading />
-          ) : detail && Object.keys(detail).length !== 0 ? (
-            <>
-              <Detail data={detail} />
-            </>
           ) : (
-            ""
+            detail &&
+            Object.keys(detail).length !== 0 && <Detail data={detail} />
           )}
         </div>
       </div>
