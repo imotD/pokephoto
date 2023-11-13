@@ -10,7 +10,6 @@ function App() {
   const [dataList, setDataList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [loadingDetail, setLoadingDetail] = useState(false);
-  const [searching, setSearching] = useState("");
   const [detail, setDetail] = useState({});
 
   const imgUrl =
@@ -27,7 +26,17 @@ function App() {
     axios
       .get(URL)
       .then((res) => {
-        setDataList(res.data.results);
+        const responseDataList = res.data.results;
+        const dataAddNumber = responseDataList.map((res) => {
+          const numberImage = res.url.split("/");
+
+          return {
+            id: numberImage[6],
+            ...res,
+          };
+        });
+
+        setDataList(dataAddNumber);
       })
       .catch((e) => {
         console.log("🚀 ~ error", e);
@@ -37,30 +46,31 @@ function App() {
       });
   };
 
-  const onClickSearch = () => {
-    if (!searching) {
-      return;
-    }
-
+  const onClickSearch = async (searchItem) => {
     setLoading(true);
+    if (!searchItem) {
+      setDataList([]);
+      await getAllPokemon();
+      setLoading(false);
+    } else {
+      try {
+        await axios.get(URL + searchItem).then((res) => {
+          const { id, name } = res.data;
 
-    axios
-      .get(URL + searching)
-      .then((res) => {
-        const { id, name } = res.data;
+          const pokeItem = {
+            name: name,
+            url: `https://pokeapi.co/api/v2/pokemon/${id}`,
+            id: id,
+          };
 
-        const pokeItem = {
-          name: name,
-          url: `https://pokeapi.co/api/v2/pokemon/${id}`,
-          id: id,
-        };
-
-        setDataList([pokeItem]);
+          setDataList([pokeItem]);
+        });
+      } catch (error) {
+        console.error(error);
+      } finally {
         setLoading(false);
-      })
-      .catch((e) => {
-        setLoading(false);
-      });
+      }
+    }
   };
 
   const onClickDetail = (id) => {
@@ -77,43 +87,28 @@ function App() {
       });
   };
 
+  const listItems = dataList.map((value) => (
+    <div key={value.id} onClick={() => onClickDetail(value.id)}>
+      <img
+        src={`${imgUrl}${value.id}.gif`}
+        className="w-10 h-10 rounded-full bg-slate-200 my-1 hover:bg-yellow-300 cursor-pointer"
+        alt="img"
+        title={value.name}
+      />
+    </div>
+  ));
+
   return (
     <div className="App">
       <Header />
       <div className="flex items-center gap-2 justify-center">
         <div className="p-5">
           {/* searching */}
-          <Searching
-            onClick={onClickSearch}
-            disable={!searching}
-            onChange={(searching) => setSearching(searching)}
-          />
+          <Searching onHandleSubmit={onClickSearch} />
 
           {/* canvas pokemon */}
           <div className="grid grid-rows-4 grid-flow-col items-center gap-2">
-            {loading ? (
-              <Loading />
-            ) : dataList.length ? (
-              dataList.map((value, key) => {
-                return (
-                  <div
-                    key={key}
-                    onClick={() =>
-                      onClickDetail(!value.id ? key + 1 : value.id)
-                    }
-                  >
-                    <img
-                      src={`${imgUrl}${!value.id ? key + 1 : value.id}.gif`}
-                      className="w-10 h-10 rounded-full bg-slate-200 my-1 hover:bg-yellow-300 cursor-pointer"
-                      alt="img"
-                      title={value.name}
-                    />
-                  </div>
-                );
-              })
-            ) : (
-              <p>Pokemon not found</p>
-            )}
+            {loading ? <Loading /> : dataList.length ? listItems : ""}
           </div>
         </div>
 

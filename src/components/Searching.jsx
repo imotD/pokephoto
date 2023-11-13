@@ -1,18 +1,26 @@
-export default function Searching({ onClickSearch, disable, searching }) {
+import { useState } from "react";
+
+export default function Searching({ onHandleSubmit }) {
+  const [searching, setSearching] = useState("");
+
+  const handleInputChange = (e) => {
+    setSearching(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    onHandleSubmit(searching);
+  };
   return (
-    <form className="my-3" onSubmit={onClickSearch}>
+    <form className="my-3" onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="name pokemon or id"
         className="p-2 bg-slate-100"
-        onChange={(e) => searching.onChange(e.target.value)}
+        onChange={handleInputChange}
       />
-      <button
-        disabled={disable}
-        onClick={onClickSearch}
-        type="button"
-        className="p-2 bg-slate-200"
-      >
+      <button type="submit" className="p-2 bg-slate-200">
         Search
       </button>
     </form>
