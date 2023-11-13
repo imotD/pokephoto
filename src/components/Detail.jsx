@@ -2,12 +2,18 @@ import { useState } from "react";
 
 export default function Detail({ data }) {
   const [imageSrc, setImageSrc] = useState("../image/pokeball.gif");
+  const imgUrlPhoto = `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${data.id}.svg`;
 
   const handleImageLoad = () => {
     setImageSrc(imgUrlPhoto);
   };
 
-  const imgUrlPhoto = `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${data.id}.svg`;
+  const types = data?.types.map((value, index) => (
+    <span className="capitalize" key={index}>
+      {value.type.name}
+      {index < data.types.length - 1 ? ", " : ""}
+    </span>
+  ));
 
   return (
     <div className="p-5 bg-slate-50 pb-10 drop-shadow-lg rotate-3 ">
@@ -19,7 +25,10 @@ export default function Detail({ data }) {
         title={data.name}
         loading="lazy"
       />
-      <p className="capitalize text-sm">{data.name}</p>
+      <p className="capitalize text-sm font-bold">{data.name}</p>
+      <div className="text-xs">{types}</div>
     </div>
   );
 }
+
+// https://onnichan.github.io/pokeapi-react/
