@@ -43,6 +43,7 @@ function App() {
       })
       .finally(() => {
         setLoading(false);
+        setDetail({});
       });
   };
 
@@ -69,6 +70,7 @@ function App() {
         console.error(error);
       } finally {
         setLoading(false);
+        setDetail({});
       }
     }
   };
