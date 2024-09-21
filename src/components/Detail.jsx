@@ -2,7 +2,8 @@ import { useState } from "react";
 
 export default function Detail({ data }) {
   const [imageSrc, setImageSrc] = useState("../image/pokeball.gif");
-  const imgUrlPhoto = `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${data.id}.svg`;
+  // const imgUrlPhoto = `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${data.id}.svg`;
+  const imgUrlPhoto = `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/99.svg`;
 
   const handleImageLoad = () => {
     setImageSrc(imgUrlPhoto);
@@ -29,22 +30,22 @@ export default function Detail({ data }) {
   ));
 
   return (
-    <div className="p-5 bg-slate-50 pb-10 drop-shadow-lg rotate-3 ">
+    <div className="p-5 bg-slate-50 pb-20 w-80 h-80 rotate-3 border-2 border-black shadow-photo ">
       <img
         src={imageSrc}
         onLoad={handleImageLoad}
-        className="w-28 h-28 bg-photo my-1 p-1 ease-in-out m-auto"
+        className="bg-photo border-2 border-black w-full h-full my-1 p-5 ease-in-out m-auto"
         alt="img"
-        title={data.name}
+        // title={data.name}
         loading="lazy"
       />
-      <p className="capitalize text-sm font-bold mb-1">{data.name}</p>
-      <p className="bg-slate-200 text-xs"> Type</p>
-      <div className="text-xs my-1">{types}</div>
-      <p className="bg-slate-200 text-xs"> Ability</p>
-      <div className="text-xs my-1">{ability}</div>
-      <p className="bg-slate-200 text-xs"> Stats</p>
-      <div class="grid grid-flow-row auto-rows-max text-xs">{stats}</div>
+      <p className="capitalize text-sm my-1">data.name</p>
+      {/* <p className="bg-slate-200 text-xs"> Type</p> */}
+      {/* <div className="text-xs my-1">{types}</div> */}
+      {/* <p className="bg-slate-200 text-xs"> Ability</p> */}
+      {/* <div className="text-xs my-1">{ability}</div> */}
+      {/* <p className="bg-slate-200 text-xs"> Stats</p> */}
+      {/* <div className="grid grid-flow-row auto-rows-max text-xs">{stats}</div> */}
     </div>
   );
 }

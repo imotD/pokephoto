@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+import Input from "./atoms/Input";
+import Button from "./atoms/Button";
+
 export default function Searching({ onHandleSubmit }) {
   const [searching, setSearching] = useState("");
 
@@ -13,16 +16,18 @@ export default function Searching({ onHandleSubmit }) {
     onHandleSubmit(searching);
   };
   return (
-    <form className="my-3" onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="name pokemon or id"
-        className="p-2 bg-slate-100"
-        onChange={handleInputChange}
-      />
-      <button type="submit" className="p-2 bg-slate-200">
-        Search
-      </button>
-    </form>
+    <div className="flex justify-center">
+      <form className="my-3 flex" onSubmit={handleSubmit}>
+        <Input
+          value={searching}
+          setValue={setSearching}
+          placeholder="name pokemon"
+          onChange={handleInputChange}
+        />
+        <Button className="ml-2" type="submit">
+          Find
+        </Button>
+      </form>
+    </div>
   );
 }

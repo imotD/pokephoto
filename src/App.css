@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  position: relative;
 }
 
 .App-logo {
@@ -61,10 +62,20 @@
   visibility: visible;
 }
 
-
 .bg-photo {
-  background-image: url('../public/image/bg-forest.jpg');
+  background-image: url("../image/bg-forest.jpg");
   background-size: cover;
-  background-repeat: no-repeat;
-  object-fit: cover;
+  background-repeat: round;
+  object-fit: contain;
+}
+
+.shadow-photo {
+  box-shadow: 12px 12px 0px;
+  transition: all 0.2s ease-out;
+}
+
+.shadow-photo:hover {
+  box-shadow: 12px 5px 0px;
+  transition: all 0.2s ease-in-out;
+  transform: translateX(3px) rotate(2deg) translateY(23px);
 }
