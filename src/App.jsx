@@ -1,6 +1,8 @@
 import "./App.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+
 import Loading from "./components/Loading";
 import Detail from "./components/Detail";
 import Searching from "./components/Searching";
@@ -11,15 +13,13 @@ import Footer from "./components/molecules/Footer";
 import Button from "./components/atoms/Button";
 
 function App() {
+  const pokeApiUrl = useSelector((state) => state.global.pokeApiUrl);
+  const pokeSpritesUrl = useSelector((state) => state.global.pokeSpritesUrl);
+
   const [dataList, setDataList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [loadingDetail, setLoadingDetail] = useState(false);
   const [detail, setDetail] = useState({});
-
-  const imgUrl =
-    "https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/versions/generation-v/black-white/animated/";
-
-  const URL = "https://pokeapi.co/api/v2/pokemon/";
 
   useEffect(() => {
     getAllPokemon();
@@ -28,7 +28,7 @@ function App() {
   const getAllPokemon = () => {
     setLoading(true);
     axios
-      .get(URL)
+      .get(pokeApiUrl)
       .then((res) => {
         const responseDataList = res.data.results;
         const dataAddNumber = responseDataList.map((res) => {
@@ -59,12 +59,12 @@ function App() {
       setLoading(false);
     } else {
       try {
-        await axios.get(URL + searchItem).then((res) => {
+        await axios.get(pokeApiUrl + searchItem).then((res) => {
           const { id, name } = res.data;
 
           const pokeItem = {
             name: name,
-            url: `https://pokeapi.co/api/v2/pokemon/${id}`,
+            url: pokeApiUrl + id,
             id: id,
           };
 
@@ -83,7 +83,7 @@ function App() {
     setLoadingDetail(true);
 
     axios
-      .get(URL + id)
+      .get(pokeApiUrl + id)
       .then((res) => {
         setDetail(res.data);
         setLoadingDetail(false);
@@ -96,7 +96,7 @@ function App() {
   const listItems = dataList.map((value) => (
     <div key={value.id} onClick={() => onClickDetail(value.id)}>
       <img
-        src={`${imgUrl}${value.id}.gif`}
+        src={`${pokeSpritesUrl}${value.id}.gif`}
         className="h-10 w-10 border-2 border-black rounded-full bg-slate-200 my-1 hover:bg-yellow-300 cursor-pointer"
         alt="img"
         title={value.name}
@@ -112,29 +112,23 @@ function App() {
       <div className="flex items-center gap-2 justify-center">
         <div className="pattern-box"></div>
         <div className="w-1/2 p-5 m-auto">
-          {/* searching */}
+          {/* SEARCHING */}
           <Searching onHandleSubmit={onClickSearch} />
 
-          {/* canvas pokemon */}
+          {/* CANVAS POKEMON */}
           <div className="mt-10 grid grid-rows-4 grid-flow-col items-center gap-2 justify-items-center w-1/3 m-auto">
             {loading ? <Loading /> : dataList.length ? listItems : ""}
           </div>
 
+          {/* PAGINATION */}
           <div className="flex flex-col items-center mt-5">
-            {/* <!-- Help text --> */}
             <span className="text-sm text-gray-700">
               Showing <span className="font-semibold text-gray-900 ">1</span> to{" "}
               <span className="font-semibold text-gray-900 ">10</span> of{" "}
               <span className="font-semibold text-gray-900 ">100</span> Entries
             </span>
-            {/* <!-- Buttons --> */}
+
             <div className="inline-flex mt-2 xs:mt-0">
-              {/* <button class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                Prev
-              </button> */}
-              {/* <button class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                Next
-              </button> */}
               <Button className="ml-2" type="submit">
                 Prev
               </Button>
@@ -145,19 +139,13 @@ function App() {
           </div>
         </div>
 
-        {/* detail */}
+        {/* PAGE DETAILS */}
         <div className="w-1/2 p-5">
-          {/* {loadingDetail ? (
-            <Loading />
-          ) : (
-            detail &&
-            Object.keys(detail).length !== 0 && <Detail data={detail} />
-          )} */}
-          <Detail />
+          <Detail loading={loadingDetail} data={detail} />
         </div>
       </div>
 
-      <Footer />
+      <Footer year="2023" />
     </div>
   );
 }

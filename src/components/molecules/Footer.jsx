@@ -1,14 +1,14 @@
-export default function Footer() {
+export default function Footer(props) {
   return (
-    <div className="text-sm py-5">
-      © 2023 Pokephoto Released under MIT License. The source code is available
-      on{" "}
+    <footer className="text-sm py-5">
+      © {props.year} Pokephoto Released under MIT License. The source code is
+      available on{" "}
       <b>
         <a href="https://github.com/imotD/pokephoto" target="_blank">
           Github
         </a>
       </b>
       .
-    </div>
+    </footer>
   );
 }
