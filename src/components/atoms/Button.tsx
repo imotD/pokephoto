@@ -3,6 +3,7 @@
 import { ClassValue } from 'clsx'
 
 import { cn } from '../../../lib/utils'
+import React from 'react'
 
 type Props = {
   className?: ClassValue
