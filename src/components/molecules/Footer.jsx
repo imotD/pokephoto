@@ -1,6 +1,6 @@
 export default function Footer(props) {
   return (
-    <footer className="text-sm py-5">
+    <footer className="footer text-sm py-5 bg-white absolute bottom-0 left-0 right-0">
       © {props.year} Pokephoto Released under MIT License. The source code is
       available on{" "}
       <b>
