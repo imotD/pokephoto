@@ -4,9 +4,9 @@ export const globalSlice = createSlice({
   name: "global",
   initialState: {
     pokeSpritesPhotoUrl:
-      "https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/",
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/",
     pokeApiUrl: "https://pokeapi.co/api/v2/pokemon/",
-    pokeApiUrlList: "https://pokeapi.co/api/v2/pokemon/?limit=20&offset=0",
+    pokeApiUrlList: "https://pokeapi.co/api/v2/pokemon?limit=20&offset=0",
     pokeSpritesUrl:
       "https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/versions/generation-v/black-white/animated/",
   },
