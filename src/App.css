@@ -80,6 +80,19 @@
   transform: translateX(3px) rotate(2deg) translateY(23px);
 }
 
-.footer{
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 30%);
+.footer {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 1) 30%
+  );
+}
+
+.sticky-tape {
+  text-shadow: 2px 2px 0px black;
+  --mask: 
+  conic-gradient(from 75deg at left,#0000,#000 1deg 29deg,#0000 30deg) left/51% 5.36px repeat-y,
+  conic-gradient(from -105deg at right,#0000,#000 1deg 29deg,#0000 30deg) right/51% 5.36px repeat-y;
+-webkit-mask: var(--mask);
+        mask: var(--mask);
 }
