@@ -90,9 +90,23 @@
 
 .sticky-tape {
   text-shadow: 2px 2px 0px black;
-  --mask: 
-  conic-gradient(from 75deg at left,#0000,#000 1deg 29deg,#0000 30deg) left/51% 5.36px repeat-y,
-  conic-gradient(from -105deg at right,#0000,#000 1deg 29deg,#0000 30deg) right/51% 5.36px repeat-y;
--webkit-mask: var(--mask);
-        mask: var(--mask);
+  --mask: conic-gradient(
+        from 75deg at left,
+        #0000,
+        #000 1deg 29deg,
+        #0000 30deg
+      )
+      left/51% 5.36px repeat-y,
+    conic-gradient(from -105deg at right, #0000, #000 1deg 29deg, #0000 30deg)
+      right/51% 5.36px repeat-y;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+}
+
+.gradient-list-poke {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 73%,
+    rgb(255 220 89) 130%
+  );
 }

@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import pokeBallLoading from "../../image/pokeball.gif";
 
 export default function Detail({ data, loading }) {
-
   const pokeSpritesPhotoUrl = useSelector(
     (state) => state.global.pokeSpritesPhotoUrl
   );
@@ -13,13 +12,11 @@ export default function Detail({ data, loading }) {
   const [imageSrc, setImageSrc] = useState(pokeBallLoading);
 
   useEffect(() => {
-
-    if(data?.id){
+    if (data?.id) {
       const imgUrlPhoto = pokeSpritesPhotoUrl + `${data?.id}.png`;
-      setImageSrc(imgUrlPhoto)
+      setImageSrc(imgUrlPhoto);
     }
-
-  },[data, pokeSpritesPhotoUrl])  
+  }, [data, pokeSpritesPhotoUrl]);
 
   return (
     <div className="p-5 bg-slate-50 pb-20 w-80 h-80 rotate-3 border-2 border-black shadow-photo ">
@@ -31,10 +28,12 @@ export default function Detail({ data, loading }) {
         onError={() => setImageSrc(pokeBallLoading)}
         loading="lazy"
       />
-      <p className="capitalize text-sm my-2">{data.name}</p>
+      <p className="capitalize text-sm my-2 font-bold">
+        {data.name || "PokeBall"}
+      </p>
       <div className="absolute rotate-12 -top-1 -right-11 bg-amber-500/55 w-28 h-8 sticky-tape">
         <span className="font-bold text-slate-50 drop-shadow-lg">
-          #{data?.id || '00'}
+          #{data?.id || "00"}
         </span>
       </div>
     </div>
@@ -56,3 +55,6 @@ Detail.defaultProps = {
 };
 
 // https://onnichan.github.io/pokeapi-react/
+// https://id.portal-pokemon.com/play/pokedex
+// https://www.pokemon.com/us/pokedex
+// https://pokeapi.co/docs/v2#locations-section
