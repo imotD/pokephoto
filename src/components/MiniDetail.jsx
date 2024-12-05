@@ -31,7 +31,7 @@ export default function Detail({ data, loading }) {
       <p className="capitalize text-sm my-2 font-bold">
         {data.name || "PokeBall"}
       </p>
-      <div className="absolute rotate-12 -top-1 -right-11 bg-amber-500/55 w-28 h-8 sticky-tape">
+      <div className="absolute rotate-12 -top-1 sm:-right-11 right-0 bg-amber-500/55 w-28 h-8 sticky-tape">
         <span className="font-bold text-slate-50 drop-shadow-lg">
           #{data?.id || "00"}
         </span>

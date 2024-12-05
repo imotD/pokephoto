@@ -2,6 +2,7 @@ import "./App.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { motion } from "framer-motion";
 
 import Loading from "./components/Loading";
 import MiniDetail from "./components/MiniDetail";
@@ -139,14 +140,13 @@ function App() {
   );
 
   return (
-    <div className="App h-screen">
+    <div className="App sm:h-screen">
       {/* HEADER */}
       <Header />
-
       {/* CONTENT */}
-      <div className="flex items-center gap-2 justify-center">
+      <div className="sm:flex items-center gap-2 justify-center">
         <div className="pattern-box"></div>
-        <div className="w-1/2 p-5 m-auto ">
+        <div className="sm:w-1/2 sm:p-5 m-auto ">
           {/* SEARCHING */}
           <Searching onHandleSubmit={onClickSearch} />
 
@@ -157,14 +157,12 @@ function App() {
             </div>
           </div>
         </div>
-
         {/* PAGE DETAILS */}
-        <div className="w-1/2 p-5">
+        <div className="flex sm:w-1/2 p-5 justify-center sm:justify-start sm:mt-0 mt-10">
           <MiniDetail loading={loadingDetail} data={detail} />
         </div>
       </div>
 
-      {/* FOOTER */}
       <Footer year="2023" />
     </div>
   );
