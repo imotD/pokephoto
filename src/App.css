@@ -63,7 +63,7 @@
 }
 
 .bg-photo {
-  background-image: url("../image/bg-forest.jpg");
+  background-image: url("../src/assets/images/bg-forest.jpg");
   background-size: cover;
   background-repeat: round;
   object-fit: contain;
@@ -109,4 +109,11 @@
     rgba(255, 255, 255, 0) 73%,
     rgb(255 220 89) 130%
   );
+}
+
+.example-container div {
+  background: black;
+  border-radius: 30px;
+  width: 150px;
+  height: 150px;
 }

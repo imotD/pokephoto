@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import PropTypes from "prop-types";
-import pokeBallLoading from "../../image/pokeball.gif";
+import pokeBallLoading from "../../src/assets/images/pokeball.gif";
 
 export default function Detail({ data, loading }) {
   const pokeSpritesPhotoUrl = useSelector(
