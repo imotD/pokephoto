@@ -77,7 +77,7 @@ jobs:
           node-version: 16
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build
         run: npm run build
@@ -90,7 +90,7 @@ jobs:
         with:
           # Upload dist folder
           path: './dist'
-          
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
