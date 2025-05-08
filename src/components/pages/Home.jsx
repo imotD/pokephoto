@@ -1,19 +1,20 @@
-import "./App.css";
+import "../../assets/css/Home.css";
+
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 
-import Loading from "./components/Loading";
-import MiniDetail from "./components/MiniDetail";
-import Searching from "./components/Searching";
+import Loading from "../Loading";
+import MiniDetail from "../MiniDetail";
+import Searching from "../Searching";
 
-import Header from "./components/molecules/Header";
-import Footer from "./components/molecules/Footer";
-import ListPokemon from "./components/molecules/ListPokemon";
-import Button from "./components/atoms/Button";
+import Header from "../molecules/Header";
+import Footer from "../molecules/Footer";
+import ListPokemon from "../molecules/ListPokemon";
+import Button from "../atoms/Button";
 
-function App() {
+function Home() {
   const pokeApiUrl = useSelector((state) => state.global.pokeApiUrl);
   const pokeSpritesUrl = useSelector((state) => state.global.pokeSpritesUrl);
   const pokeApiUrlList = useSelector((state) => state.global.pokeApiUrlList);
@@ -168,4 +169,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
