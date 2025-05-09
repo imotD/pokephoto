@@ -7,7 +7,7 @@ import pokeBallLoading from "../../src/assets/images/pokeball.gif";
 import Button from "./atoms/Button";
 import { Link } from "react-router-dom";
 
-export default function Detail({ data, loading }) {
+export default function Detail({ data, loading , showButton}) {
   const pokeSpritesPhotoUrl = useSelector(
     (state) => state.global.pokeSpritesPhotoUrl
   );
@@ -35,7 +35,7 @@ export default function Detail({ data, loading }) {
         {data.name || "PokeBall"}
       </p>
 
-      {Object.keys(data).length !== 0 && (
+      { showButton && Object.keys(data).length !== 0 && (
         <div className="pt-5">
           <Link to={`/poke-detail/${data?.id}`}>
             <Button className="m-auto">Details</Button>

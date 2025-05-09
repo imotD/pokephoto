@@ -21,6 +21,7 @@ function Home() {
   const [loading, setLoading] = useState(false);
   const [loadingDetail, setLoadingDetail] = useState(false);
   const [detail, setDetail] = useState({});
+  const [showButton, setShowButton] = useState(true);
 
   const [urlListPoke, setUrlListPoke] = useState(pokeApiUrlList);
 
@@ -109,8 +110,10 @@ function Home() {
 
   return (
     <div className="App sm:h-screen">
+      
       {/* HEADER */}
       <Header />
+
       {/* CONTENT */}
       <div className="sm:flex items-center gap-2 justify-center">
         <div className="pattern-box"></div>
@@ -140,7 +143,7 @@ function Home() {
 
         {/* PAGE DETAILS */}
         <div className="flex sm:w-1/2 p-5 justify-center sm:justify-start sm:mt-0 mt-10">
-          <MiniDetail loading={loadingDetail} data={detail} />
+          <MiniDetail loading={loadingDetail} data={detail} showButton={showButton} />
         </div>
 
       </div>
