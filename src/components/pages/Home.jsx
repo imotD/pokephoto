@@ -1,21 +1,19 @@
-import "./App.css";
+import "../../assets/css/Home.css";
+
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
 
-import Loading from "./components/Loading";
-import MiniDetail from "./components/MiniDetail";
-import Searching from "./components/Searching";
+import Loading from "../Loading";
+import MiniDetail from "../MiniDetail";
+import Searching from "../Searching";
 
-import Header from "./components/molecules/Header";
-import Footer from "./components/molecules/Footer";
-import ListPokemon from "./components/molecules/ListPokemon";
-import Button from "./components/atoms/Button";
+import Header from "../molecules/Header";
+import Footer from "../molecules/Footer";
+import ListPokemon from "../molecules/ListPokemon";
 
-function App() {
+function Home() {
   const pokeApiUrl = useSelector((state) => state.global.pokeApiUrl);
-  const pokeSpritesUrl = useSelector((state) => state.global.pokeSpritesUrl);
   const pokeApiUrlList = useSelector((state) => state.global.pokeApiUrlList);
 
   const [dataList, setDataList] = useState([]);
@@ -109,58 +107,44 @@ function App() {
       });
   };
 
-  const listItems = (
-    <>
-      <div className="mt-10 grid grid-cols-6 align-center m-auto justify-items-center ">
-        {dataList.map((value) => (
-          <div key={value.id} onClick={() => onClickDetail(value.id)}>
-            <img
-              src={`${pokeSpritesUrl}${value.id}.gif`}
-              className="h-10 w-10 border-2 border-black rounded-full bg-slate-200 my-1 hover:bg-yellow-300 cursor-pointer"
-              alt="img"
-              title={value.name}
-              loading="lazy"
-            />
-          </div>
-        ))}
-      </div>
-      <div className="flex align-center justify-center py-5 mb-5">
-        <Button
-          onClick={getAllPokemon}
-          className={
-            ("ml-2", isDisabled ? "bg-yellow-100 cursor-not-allowed" : "")
-          }
-          type="button"
-          isDisabled={isDisabled}
-        >
-          Show more
-        </Button>
-      </div>
-    </>
-  );
-
   return (
     <div className="App sm:h-screen">
+      
       {/* HEADER */}
       <Header />
+
       {/* CONTENT */}
       <div className="sm:flex items-center gap-2 justify-center">
         <div className="pattern-box"></div>
         <div className="sm:w-1/2 sm:p-5 m-auto ">
+
           {/* SEARCHING */}
           <Searching onHandleSubmit={onClickSearch} />
 
           {/* CANVAS POKEMON */}
           <div className="w-80 h-96 overflow-scroll	m-auto mt-6 border-2 border-black gradient-list-poke">
             <div className="">
-              {loading ? <Loading /> : dataList.length ? listItems : ""}
+              {loading ? (
+                <Loading />
+              ) : dataList.length ? (
+                <ListPokemon
+                  data={dataList}
+                  isDisabled={isDisabled}
+                  handleClickDetail={(id) => onClickDetail(id)}
+                  handleClickAll={getAllPokemon}
+                />
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>
+
         {/* PAGE DETAILS */}
         <div className="flex sm:w-1/2 p-5 justify-center sm:justify-start sm:mt-0 mt-10">
-          <MiniDetail loading={loadingDetail} data={detail} />
+          <MiniDetail loading={loadingDetail} data={detail} isShowButton={true} />
         </div>
+
       </div>
 
       <Footer year="2023" />
@@ -168,4 +152,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;

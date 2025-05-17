@@ -21,7 +21,7 @@ export default function Searching({ onHandleSubmit }) {
         <Input
           value={searching}
           setValue={setSearching}
-          placeholder="name pokemon"
+          placeholder="name pokemon or id"
           onChange={handleInputChange}
         />
         <Button className="ml-2" type="submit">

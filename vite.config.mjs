@@ -7,7 +7,7 @@ export default defineConfig(() => {
       outDir: "build",
     },
     plugins: [react()],
-    base: "/pokephoto/",
+    base: "/",
     server: {
       port: 3000,
       open: true,

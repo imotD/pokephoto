@@ -4,7 +4,10 @@ import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import pokeBallLoading from "../../src/assets/images/pokeball.gif";
 
-export default function Detail({ data, loading }) {
+import Button from "./atoms/Button";
+import { Link } from "react-router-dom";
+
+export default function Detail({ data, loading , isShowButton = false}, isDetail = false) {
   const pokeSpritesPhotoUrl = useSelector(
     (state) => state.global.pokeSpritesPhotoUrl
   );
@@ -31,6 +34,17 @@ export default function Detail({ data, loading }) {
       <p className="capitalize text-sm my-2 font-bold">
         {data.name || "PokeBall"}
       </p>
+
+      { isShowButton && Object.keys(data).length !== 0 && (
+        <div className="pt-5">
+          <Link to={`/poke-detail/${data?.id}`}>
+            <Button className="m-auto">Details</Button>
+          </Link>
+        </div>
+      )}
+
+
+
       <div className="absolute rotate-12 -top-1 sm:-right-11 right-0 bg-amber-500/55 w-28 h-8 sticky-tape">
         <span className="font-bold text-slate-50 drop-shadow-lg">
           #{data?.id || "00"}
@@ -58,3 +72,4 @@ Detail.defaultProps = {
 // https://id.portal-pokemon.com/play/pokedex
 // https://www.pokemon.com/us/pokedex
 // https://pokeapi.co/docs/v2#locations-section
+// https://www.neobrutalism.dev/
