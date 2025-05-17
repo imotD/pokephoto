@@ -21,7 +21,6 @@ function Home() {
   const [loading, setLoading] = useState(false);
   const [loadingDetail, setLoadingDetail] = useState(false);
   const [detail, setDetail] = useState({});
-  const [showButton, setShowButton] = useState(true);
 
   const [urlListPoke, setUrlListPoke] = useState(pokeApiUrlList);
 
@@ -143,7 +142,7 @@ function Home() {
 
         {/* PAGE DETAILS */}
         <div className="flex sm:w-1/2 p-5 justify-center sm:justify-start sm:mt-0 mt-10">
-          <MiniDetail loading={loadingDetail} data={detail} showButton={showButton} />
+          <MiniDetail loading={loadingDetail} data={detail} isShowButton={true} />
         </div>
 
       </div>

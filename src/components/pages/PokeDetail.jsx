@@ -15,6 +15,7 @@ export default function PokeDetail() {
 
   const [detail, setDetail] = useState({});
 
+
   useEffect(() => {
     axios
       .get(pokeApiUrl + id)
@@ -26,8 +27,9 @@ export default function PokeDetail() {
       })
   }, [id]);
 
+
   return (
-    <div className="d-flex text-center items-center justify-items-center">
+    <div className="d-flex text-center itemsåß-center justify-items-center">
       <Header />
       <div className="pattern-box"></div>
       <MiniDetail data={detail} loading={false} />
