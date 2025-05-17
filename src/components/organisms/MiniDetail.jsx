@@ -2,40 +2,57 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import PropTypes from "prop-types";
-import pokeBallLoading from "../../src/assets/images/pokeball.gif";
+import pokeBallLoading from "../../assets/images/pokeball.gif";
 
-import Button from "./atoms/Button";
+import Button from "../atoms/Button";
 import { Link } from "react-router-dom";
 
-export default function Detail({ data, loading , isShowButton = false}, isDetail = false) {
+export default function Detail({
+  data,
+  loading = false,
+  isShowButton = false,
+  isDetail = false,
+  isSmall = false,
+}) {
   const pokeSpritesPhotoUrl = useSelector(
     (state) => state.global.pokeSpritesPhotoUrl
   );
+
+  console.log(data, "data");
 
   const [imageSrc, setImageSrc] = useState(pokeBallLoading);
 
   useEffect(() => {
     if (data?.id) {
-      const imgUrlPhoto = pokeSpritesPhotoUrl + `${data?.id}.png`;
+      const imgUrlPhoto = isSmall
+        ? pokeBallLoading
+        : pokeSpritesPhotoUrl + `${data?.id}.png`;
       setImageSrc(imgUrlPhoto);
     }
   }, [data, pokeSpritesPhotoUrl]);
 
   return (
-    <div className="p-5 bg-slate-50 pb-20 w-80 h-80 rotate-3 border-2 border-black shadow-photo ">
+    <Link
+      to={isSmall ? `/poke-detail/${data?.id || '1'}` : "#"}
+      className={`${
+        isSmall ? "w-32 h-32 p-2 pb-8" : "w-80 h-80 p-5 pb-20"
+      }  bg-slate-50  rotate-3 border-2 border-black shadow-photo`}
+    >
       <img
         src={imageSrc}
-        className="bg-photo border-2 border-black w-full h-full my-1 p-5 ease-in-out m-auto"
+        className={`${
+          isSmall ? "p-2 sepia " : "p-5"
+        } bg-photo border-2 border-black w-full h-full my-1 ease-in-out m-auto`}
         alt="img"
         title={data?.name || "Pokemon"}
         onError={() => setImageSrc(pokeBallLoading)}
         loading="lazy"
       />
-      <p className="capitalize text-sm my-2 font-bold">
+      <p className={` ${isSmall ? "" : "my-2"}capitalize text-sm font-bold`}>
         {data.name || "PokeBall"}
       </p>
 
-      { isShowButton && Object.keys(data).length !== 0 && (
+      {isShowButton && Object.keys(data).length !== 0 && (
         <div className="pt-5">
           <Link to={`/poke-detail/${data?.id}`}>
             <Button className="m-auto">Details</Button>
@@ -43,14 +60,22 @@ export default function Detail({ data, loading , isShowButton = false}, isDetail
         </div>
       )}
 
-
+      {isDetail && Object.keys(data).length !== 0 && (
+        <div>
+          {data?.types?.map((type, index) => (
+            <span key={index} className={`text-xs rounded-full px-2 py-1 mr-1`}>
+              {type.type.name}
+            </span>
+          ))}
+        </div>
+      )}
 
       <div className="absolute rotate-12 -top-1 sm:-right-11 right-0 bg-amber-500/55 w-28 h-8 sticky-tape">
         <span className="font-bold text-slate-50 drop-shadow-lg">
-          #{data?.id || "00"}
+          #{isSmall ? "??" : data?.id || "00"}
         </span>
       </div>
-    </div>
+    </Link>
   );
 }
 

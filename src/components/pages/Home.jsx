@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import Loading from "../Loading";
-import MiniDetail from "../MiniDetail";
+import MiniDetail from "../organisms/MiniDetail";
 import Searching from "../Searching";
 
 import Header from "../molecules/Header";
@@ -44,7 +44,7 @@ function Home() {
 
         const dataAddNumber = responseDataList.results.map((res) => {
           const numberImage = res.url.split("/");
-
+          console.log(numberImage, "numberImage");
           return {
             id: numberImage[6],
             ...res,

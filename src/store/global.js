@@ -7,6 +7,8 @@ export const globalSlice = createSlice({
       "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/",
     pokeApiUrl: "https://pokeapi.co/api/v2/pokemon/",
     pokeApiUrlList: "https://pokeapi.co/api/v2/pokemon?limit=24&offset=0",
+    pokeApiEvolutionUrl:
+      "https://pokeapi.co/api/v2/evolution-chain/",
     pokeSpritesUrl:
       "https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/versions/generation-v/black-white/animated/",
   },
