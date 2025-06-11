@@ -18,8 +18,6 @@ export default function Detail({
     (state) => state.global.pokeSpritesPhotoUrl
   );
 
-  console.log(data, "data");
-
   const [imageSrc, setImageSrc] = useState(pokeBallLoading);
 
   useEffect(() => {
@@ -33,7 +31,7 @@ export default function Detail({
 
   return (
     <Link
-      to={isSmall ? `/poke-detail/${data?.id || '1'}` : "#"}
+      to={isSmall ? `/poke-detail/${data?.id || "1"}` : "#"}
       className={`${
         isSmall ? "w-32 h-32 p-2 pb-8" : "w-80 h-80 p-5 pb-20"
       }  bg-slate-50  rotate-3 border-2 border-black shadow-photo`}

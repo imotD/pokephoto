@@ -4,7 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import Loading from "../Loading";
+import Loading from "../molecules/Loading";
 import MiniDetail from "../organisms/MiniDetail";
 import Searching from "../Searching";
 
@@ -44,7 +44,6 @@ function Home() {
 
         const dataAddNumber = responseDataList.results.map((res) => {
           const numberImage = res.url.split("/");
-          console.log(numberImage, "numberImage");
           return {
             id: numberImage[6],
             ...res,
