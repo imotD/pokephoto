@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import Loading from "../Loading";
-import MiniDetail from "../MiniDetail";
+import MiniDetail from "../organisms/MiniDetail";
 import Searching from "../Searching";
 
 import Header from "../molecules/Header";
@@ -44,7 +44,7 @@ function Home() {
 
         const dataAddNumber = responseDataList.results.map((res) => {
           const numberImage = res.url.split("/");
-
+          console.log(numberImage, "numberImage");
           return {
             id: numberImage[6],
             ...res,
@@ -109,7 +109,6 @@ function Home() {
 
   return (
     <div className="App sm:h-screen">
-      
       {/* HEADER */}
       <Header />
 
@@ -117,7 +116,6 @@ function Home() {
       <div className="sm:flex items-center gap-2 justify-center">
         <div className="pattern-box"></div>
         <div className="sm:w-1/2 sm:p-5 m-auto ">
-
           {/* SEARCHING */}
           <Searching onHandleSubmit={onClickSearch} />
 
@@ -142,9 +140,12 @@ function Home() {
 
         {/* PAGE DETAILS */}
         <div className="flex sm:w-1/2 p-5 justify-center sm:justify-start sm:mt-0 mt-10">
-          <MiniDetail loading={loadingDetail} data={detail} isShowButton={true} />
+          <MiniDetail
+            loading={loadingDetail}
+            data={detail}
+            isShowButton={true}
+          />
         </div>
-
       </div>
 
       <Footer year="2023" />
