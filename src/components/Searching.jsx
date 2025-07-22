@@ -19,12 +19,13 @@ export default function Searching({ onHandleSubmit }) {
     <div className="flex justify-center">
       <form className="my-3 flex" onSubmit={handleSubmit}>
         <Input
+          className="px-6"
           value={searching}
           setValue={setSearching}
           placeholder="name pokemon or id"
           onChange={handleInputChange}
         />
-        <Button className="ml-2" type="submit">
+        <Button className="ml-2 px-5" type="submit">
           Find
         </Button>
       </form>
