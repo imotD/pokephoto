@@ -7,7 +7,7 @@ import pokeBallLoading from "../../assets/images/pokeball.gif";
 import Button from "../atoms/Button";
 import { Link } from "react-router-dom";
 
-export default function Detail({
+export default function MiniDetail({
   data,
   loading = false,
   isShowButton = false,
@@ -77,16 +77,16 @@ export default function Detail({
   );
 }
 
-Detail.propTypes = {
+MiniDetail.propTypes = {
   data: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
   }),
 };
 
-Detail.defaultProps = {
+MiniDetail.defaultProps = {
   data: {
-    id: 35,
+    id: 92,
     name: "Pokemon",
   },
 };
