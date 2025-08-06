@@ -12,6 +12,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import PokeDetail from "./components/pages/PokeDetail.jsx";
 import Home from "./components/pages/Home.jsx";
+import NotFound from "./components/pages/NotFound.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -24,7 +25,7 @@ root.render(
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/poke-detail/:id" element={<PokeDetail />} />
-            <Route path="*" element={<h1>404 Not Found</h1>} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </Provider>
