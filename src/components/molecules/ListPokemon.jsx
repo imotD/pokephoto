@@ -14,7 +14,7 @@ export default function ListPokemon({ data, handleClickDetail }) {
 
   return (
     <>
-      <div className="mt-10 grid grid-cols-6 align-center m-auto justify-items-center ">
+      <div className="mt-10 grid grid-cols-6 align-center m-auto justify-items-center">
         {data.pages.flatMap((page) =>
           page.data.map((value) => (
             <div
@@ -25,14 +25,14 @@ export default function ListPokemon({ data, handleClickDetail }) {
               {!loadedImage[value.id] && (
                 <img
                   src={pokeBallLoading}
-                  className="h-10 w-10 border-2 border-black rounded-full bg-slate-200 my-1 absolute top-0"
+                  className="h-10 w-10 border-2 border-black dark:border-white rounded-full bg-slate-200 my-1 absolute top-0"
                   alt="img"
                 />
               )}
 
               <img
                 src={`${pokeSpritesUrl}${value.id}.gif`}
-                className={`h-10 w-10 border-2 border-black rounded-full bg-slate-200 my-1 hover:bg-yellow-300  ${
+                className={`h-10 w-10 border-2 border-black dark:border-white rounded-full bg-slate-200 my-1 hover:bg-yellow-300  ${
                   loadedImage[value.id]
                     ? `opacity-100 cursor-pointer`
                     : `opacity-0`

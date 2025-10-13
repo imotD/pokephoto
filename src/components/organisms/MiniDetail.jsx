@@ -25,16 +25,17 @@ export default function MiniDetail({
       const imgUrlPhoto = isSmall
         ? pokeBallLoading
         : pokeSpritesPhotoUrl + `${data?.id}.png`;
+
       setImageSrc(imgUrlPhoto);
     }
-  }, [data, pokeSpritesPhotoUrl]);
+  }, [data]);
 
   return (
     <Link
-      to={isSmall ? `/poke-detail/${data?.id || "1"}` : "#"}
+      to={isSmall && data ? `/poke-detail/${data?.id || "1"}` : "#"}
       className={`${
         isSmall ? "w-32 h-32 p-2 pb-8" : "w-80 h-80 p-5 pb-20"
-      }  bg-slate-50  rotate-3 border-2 border-black shadow-photo`}
+      }  bg-slate-50  rotate-3 border-2 border-black shaxfdow-photo`}
     >
       <img
         src={imageSrc}
@@ -46,15 +47,17 @@ export default function MiniDetail({
         onError={() => setImageSrc(pokeBallLoading)}
         loading="lazy"
       />
-      <p className={` ${isSmall ? "" : "my-2"}capitalize text-sm font-bold`}>
-        {data.name || "PokeBall"}
+      <p className={` ${isSmall ? "" : "my-2"} capitalize text-sm font-bold`}>
+        {data?.name || "PokeBall"}
       </p>
 
-      {isShowButton && Object.keys(data).length !== 0 && (
+      {Object.keys(data)?.length > 0 && (
         <div className="pt-5">
-          <Link to={`/poke-detail/${data?.id}`}>
-            <Button className="m-auto">Details</Button>
-          </Link>
+          {isShowButton && (
+            <Link to={`/poke-detail/${data?.id}`}>
+              <Button className="m-auto">Details</Button>
+            </Link>
+          )}
         </div>
       )}
 
@@ -82,13 +85,6 @@ MiniDetail.propTypes = {
     id: PropTypes.number,
     name: PropTypes.string,
   }),
-};
-
-MiniDetail.defaultProps = {
-  data: {
-    id: 92,
-    name: "Pokemon",
-  },
 };
 
 // https://onnichan.github.io/pokeapi-react/

@@ -57,13 +57,13 @@ export default function PokeDetail() {
   };
 
   return (
-    <div className="d-flex text-center itemsåß-center justify-items-center">
+    <div className="d-flex text-center items-center justify-items-center dark:bg-slate-800 App sm:h-screen">
       <Header />
       <div className="pattern-box"></div>
       <div className="flex justify-center items-center gap-12">
-        <MiniDetail data={evolution[0]} isSmall={true} />
-        <MiniDetail data={detail} isDetail={true} />
-        <MiniDetail data={evolution[1]} isSmall={true} />
+        <MiniDetail data={evolution[0] || {}} isSmall={true} />
+        <MiniDetail data={detail || {}} isDetail={true} />
+        <MiniDetail data={evolution[1] || {}} isSmall={true} />
       </div>
     </div>
   );

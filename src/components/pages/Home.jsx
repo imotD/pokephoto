@@ -46,19 +46,21 @@ function Home() {
   const pokemonIsLoading = isPendingList;
 
   return (
-    <div className="App sm:h-screen">
+    <div className="App sm:h-screen dark:bg-slate-800">
       {/* HEADER */}
       <Header />
 
       {/* CONTENT */}
       <div className="sm:flex items-center gap-2 justify-center">
+        {/* PATTERN-BOX */}
         <div className="pattern-box"></div>
+
         <div className="sm:w-1/2 sm:p-5 m-auto ">
           {/* SEARCHING */}
           <Searching onHandleSubmit={handleSearch} />
 
           {/* CANVAS POKEMON */}
-          <div className="w-80 h-96 overflow-scroll	m-auto mt-6 border-2 border-black gradient-list-poke">
+          <div className="w-80 h-96 overflow-scroll	m-auto mt-6 border-2 border-black dark:border-white gradient-list-poke">
             <div className="">
               {pokemonIsLoading ? (
                 <Loading />
@@ -71,16 +73,14 @@ function Home() {
                 ""
               )}
 
+              {/* PAGINATION */}
               {!searchItem && hasNextPage && (
                 <div className="flex align-center justify-center py-5 mb-5">
                   <Button
                     onClick={() => fetchNextPage()}
-                    className={
-                      ("ml-2",
-                      isFetchingNextPage
-                        ? "bg-yellow-100 cursor-not-allowed"
-                        : "")
-                    }
+                    className={`ml-2 ${
+                      isFetchingNextPage && "bg-yellow-100 cursor-not-allowed"
+                    }`}
                     type="button"
                     disabled={isFetchingNextPage}
                   >
@@ -96,7 +96,7 @@ function Home() {
         <div className="flex sm:w-1/2 p-5 justify-center sm:justify-start sm:mt-0 mt-10">
           <MiniDetail
             loading={isPendingDetail}
-            data={detailData}
+            data={detailData || {}}
             isShowButton={true}
           />
         </div>
