@@ -1,0 +1,40 @@
+/*.card-3d {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    overflow: hidden;
+}*/
+
+.holo-glare {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    background: linear-gradient(
+        120deg,
+        transparent 30%,
+        rgba(255, 0, 255, 0.35),
+        rgba(0, 255, 255, 0.35),
+        rgba(255, 255, 0, 0.35),
+        transparent 70%
+    );
+
+    /*background: conic-gradient(from 0deg, magenta, cyan, yellow, magenta);*/
+    filter: contrast(120%) saturate(160%);
+
+    mix-blend-mode: screen;
+    opacity: 0;
+}
+
+.holo-glow {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.8),
+        transparent 60%
+    );
+    opacity: 0;
+    pointer-events: none;
+    filter: blur(20px);
+}
